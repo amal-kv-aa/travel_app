@@ -17,9 +17,7 @@ class Options extends StatelessWidget {
               .push(MaterialPageRoute(builder: (ctx) => const AdvisoryPage())),
           child: Column(
             children: [
-              Image.network(
-                  "https://tse1.mm.bing.net/th?id=OIP.T4mNfljviDz4AtQyiOSZOQHaHa&pid=Api&P=0",
-                  height: 60.h),
+              Image.asset("assets/advisory.jpeg", height: 60.h),
               Center(
                 child: Text(
                   "Advisory",
@@ -31,7 +29,7 @@ class Options extends StatelessWidget {
           ),
         ),
         GestureDetector(
-           onTap: () => Navigator.of(context)
+          onTap: () => Navigator.of(context)
               .push(MaterialPageRoute(builder: (ctx) => const AdvisoryPage())),
           child: Column(
             children: [
@@ -40,16 +38,19 @@ class Options extends StatelessWidget {
                   height: 60.h),
               Center(
                 child: Text(
-                  "Activit",
-                  style: GoogleFonts.anton(color: Colors.black, fontSize: 10.sp),
+                  "Activity",
+                  style:
+                      GoogleFonts.anton(color: Colors.black, fontSize: 10.sp),
                 ),
               )
             ],
           ),
         ),
         GestureDetector(
-           onTap: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (ctx) => const Booking(isTrain: true,))),
+          onTap: () => Navigator.of(context).push(MaterialPageRoute(
+              builder: (ctx) => const Booking(
+                    isTrain: true,
+                  ))),
           child: Column(
             children: [
               Image.network(
@@ -58,8 +59,9 @@ class Options extends StatelessWidget {
               ),
               Center(
                 child: Text(
-                  "find Train",
-                  style: GoogleFonts.anton(color: Colors.black, fontSize: 10.sp),
+                  "book Train",
+                  style:
+                      GoogleFonts.anton(color: Colors.black, fontSize: 10.sp),
                 ),
               )
             ],

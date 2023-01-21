@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app/screens/home/view/widget/card_layout/custom_card.dart';
@@ -13,7 +11,7 @@ class DestinationsOpen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 180.h,
+      height: 150.h,
       width: double.infinity,
       child: Consumer<HomeProvider>(builder: (context, value, child) {
         if (value.data == null) {
@@ -33,7 +31,7 @@ class DestinationsOpen extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
             return Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding:   EdgeInsets.symmetric(horizontal: 10.w),
               child: PlacesCard(
                 img: img[index + 1].src.large,
               ),

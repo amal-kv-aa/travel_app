@@ -12,7 +12,6 @@ class PlacesCard extends StatelessWidget {
       onTap: () => Navigator.of(context)
           .push(MaterialPageRoute(builder: (ctx) => DetailsPage(img: img!))),
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
             height: 100.h,
@@ -34,18 +33,18 @@ class PlacesCard extends StatelessWidget {
                       Positioned(
                         bottom: 2,
                         left: 5,
-                        child:Text("united arab",) )
+                        child:Text("united arab") )
                     ]),
           ),
-          SizedBox(height: 20.h,),
-          const Center(
-            child: Text("united arab",style: TextStyle(color: Colors.black),) ,
+          SizedBox(height: 10.h,),
+           const Center(
+            child: Text("united arab",style: TextStyle(color: Colors.black,fontWeight: FontWeight.w600),) ,
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children:  [
               const Icon(Icons.home_outlined),
-              SizedBox(width: 10.w,),
+              SizedBox(width: 5.w,),
               const Text("accommodation",style: TextStyle(color: Colors.black),)
             ],
           )

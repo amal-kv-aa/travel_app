@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:travel_app/screens/detailspage/view/details.dart';
 import 'package:travel_app/screens/home/provider/provider.dart';
@@ -40,21 +39,37 @@ class RandomPlaces extends StatelessWidget {
                             image: NetworkImage(img.toString()),
                             fit: BoxFit.cover)),
                     child: Padding(
-                      padding:  EdgeInsets.symmetric(horizontal: 10.w,vertical: 10.h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 10.w, vertical: 10.h),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children:  [
-                           Text("California",style: GoogleFonts.anton(),),
-                          SizedBox(height: 5.h,),
-                          const Flexible(
-                            child: Text(
-                              "Lorem ipsum dolor sit amet, consectetur cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-                              style: TextStyle(
-                                color: Colors.white70,fontStyle: FontStyle.italic
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: const [
+                              Icon(
+                                Icons.save,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                          GridTileBar(
+                            backgroundColor:
+                                const Color.fromARGB(94, 12, 12, 12),
+                            title: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 5.h),
+                              child: const Text(
+                                "California",
+                                style: TextStyle(),
                               ),
                             ),
-                          )
+                            subtitle: const Text(
+                              "Lorem ipsum dolor sit amet, consectetur cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
+                            ),
+                          ),
                         ],
                       ),
                     ),

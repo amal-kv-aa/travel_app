@@ -30,7 +30,6 @@ getDatas(){
               //     .showSnackBar(const SnackBar(content: Text("somthing went wrong..")));
             }
     });
-    
     }
     }
         
