@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:travel_app/screens/detailspage/view/details.dart';
+import 'package:travel_app/screens/booking/view/booking.dart';
 import 'package:travel_app/screens/home/provider/provider.dart';
-import 'package:travel_app/screens/home/view/widget/custom_card.dart';
+import 'package:travel_app/screens/home/view/widget/destion/destination.dart';
+import 'package:travel_app/screens/home/view/widget/options/options.dart';
+import 'package:travel_app/screens/home/view/widget/randomplaces/rondomlist.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -11,6 +14,7 @@ class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
 }
+
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   double maxSlide = 225;
@@ -18,10 +22,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     animationController = AnimationController(
-      animationBehavior: AnimationBehavior.normal,
-      
-        vsync: this, duration: const Duration(milliseconds: 1500));
+        animationBehavior: AnimationBehavior.normal,
+        vsync: this,
+        duration: const Duration(milliseconds: 1200));
     togle();
+  }
+
+  @override
+  void dispose() {
+    animationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,18 +66,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                       child: Transform(
                         transform: Matrix4.identity()..translate(0.0, slide),
                         alignment: Alignment.centerLeft,
-                        child: SizedBox(
-                          height: 100.h,
-                          width: 150.w,
-                          child: Card(
-                            shadowColor: Colors.black,
-                            elevation: 10,
-                            color: Colors.white,
-                            child: Center(
-                                child: Image.network(
-                              "https://tse3.mm.bing.net/th?id=OIP.gO_1YZ5JIbT7Sca52NxaygHaEe&pid=Api&P=0",
-                              height: 60.h,
-                            )),
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (ctx) => const Booking())),
+                          child: SizedBox(
+                            height: 100.h,
+                            width: 150.w,
+                            child: Card(
+                              shadowColor: Colors.black,
+                              elevation: 10,
+                              color: Colors.white,
+                              child: Center(
+                                  child: Image.network(
+                                "https://tse3.mm.bing.net/th?id=OIP.gO_1YZ5JIbT7Sca52NxaygHaEe&pid=Api&P=0",
+                                height: 60.h,
+                              )),
+                            ),
                           ),
                         ),
                       ),
@@ -78,19 +93,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                         transform: Matrix4.identity()
                           ..translate(0.02, slide, 1.0),
                         alignment: Alignment.centerRight,
-                        child: SizedBox(
-                          height: 100.h,
-                          width: 150.w,
-                          child: Card(
-                            color: Colors.white,
-                            shadowColor: Colors.black,
-                            elevation: 10,
-                            child: Center(
-                                child: Image.network(
-                              "https://tse1.mm.bing.net/th?id=OIP.7DfQabKVGZDcVypg4DBpKwHaHa&pid=Api&P=0",
-                              height: 60.h,
-                            )
-                                ),
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (ctx) => const Booking(isHotel: true,))),
+                          child: SizedBox(
+                            height: 100.h,
+                            width: 150.w,
+                            child: Card(
+                              color: Colors.white,
+                              shadowColor: Colors.black,
+                              elevation: 10,
+                              child: Center(
+                                  child: Image.network(
+                                "https://tse1.mm.bing.net/th?id=OIP.7DfQabKVGZDcVypg4DBpKwHaHa&pid=Api&P=0",
+                                height: 60.h,
+                              )),
+                            ),
                           ),
                         ),
                       ),
@@ -98,83 +117,42 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   ],
                 ),
                 SizedBox(
-                  height: 60.h,
+                  height: 70.h,
                 ),
-                 Padding(
-                   padding:  EdgeInsets.symmetric(horizontal: 16.w,vertical: 10.h),
-                   child: Text("Destinations open for your trip",style: TextStyle(color: Colors.black,fontSize: 22.sp,fontWeight: FontWeight.bold),),
-                 ),
-                
+                //====Options====buttons===//
+                const Options(),
                 SizedBox(
-                  height: 180.h,
-                  width: double.infinity,
-                  child:
-                      Consumer<HomeProvider>(builder: (context, value, child) {
-                    if (value.data == null) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (value.data!.err != null) {
-                      return const Center(
-                        child: Text("checkyour internet found.."),
-                      );
-                    }
-                    final img = value.data?.photos;
-                    return ListView.builder(
-                      physics: const BouncingScrollPhysics(),
-                      itemCount: img!.length -1,
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: PlacesCard(
-                            img: img[index+1].src.large,
-                          ),
-                        );
-                      },
-                    );
-                  }),
+                  height: 10.h,
                 ),
+                Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                  child: Text(
+                    "Destinations open for Travel",
+                    style: GoogleFonts.anton(
+                        color: Colors.black,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w200),
+                  ),
+                ),
+                //=============destination=====home=======list======//
+                const DestinationsOpen(),
                 SizedBox(
                   height: 20.h,
                 ),
-                Consumer<HomeProvider>(
-                  builder: (context, value, child) {
-                    if (value.data == null) {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                    if (value.data!.err != null) {
-                      return const SizedBox();
-                    }
-                    return ListView.builder(
-                        addAutomaticKeepAlives: true,
-                        physics: const BouncingScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: 20,
-                        itemBuilder: (context, index) {
-                          final img = value.data?.photos[index + 10].src.medium;
-                          return Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: GestureDetector(
-                                onTap: () => Navigator.of(context).push(
-                                    MaterialPageRoute(
-                                        builder: (ctx) =>
-                                            DetailsPage(img: img!))),
-                                child: Container(
-                                  height: 240.h,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                      image: DecorationImage(
-                                          image: NetworkImage(img.toString()),
-                                          fit: BoxFit.cover)),
-                                )),
-                          );
-                        });
-                  },
-                )
+                 Padding(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 16.w, vertical: 10.h),
+                  child: Text(
+                    "Popular places",
+                    style: GoogleFonts.anton(
+                        color: Colors.black,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w200),
+                  ),
+                ),
+                //=============Randomplaces====home=======list=====//
+                const RandomPlaces(),
               ],
             );
           }),
@@ -184,31 +162,4 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   togle() => animationController.isDismissed
       ? animationController.forward()
       : animationController.reverse();
-}
-
-class CardTravel extends StatelessWidget {
-  const CardTravel({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      top: 250.h,
-      left: 20,
-      child: SizedBox(
-        height: 100.h,
-        width: 150.w,
-        child: Card(
-          child: Center(
-            child: Icon(Icons.local_airport_sharp,
-                size: 40.sp,
-                color: Colors.white,
-                shadows: const [
-                  BoxShadow(
-                      color: Colors.black, offset: Offset(0, 5), blurRadius: 10)
-                ]),
-          ),
-        ),
-      ),
-    );
-  }
 }

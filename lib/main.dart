@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:travel_app/screens/advisory/provider/sliding_provider.dart';
 import 'package:travel_app/screens/home/provider/provider.dart';
+import 'package:travel_app/screens/main/provider/mainprovider.dart';
+import 'package:travel_app/screens/main/view/mainview.dart';
 import 'package:travel_app/screens/splash/provider/splash.dart';
-import 'package:travel_app/screens/splash/view/splash.dart';
 
 void main() {
 runApp(MultiProvider(
@@ -11,7 +13,9 @@ runApp(MultiProvider(
       ChangeNotifierProvider(
         create: (context) => SplashProvider(),
       ),
-      ChangeNotifierProvider(create: (_)=>HomeProvider())
+      ChangeNotifierProvider(create: (_)=>HomeProvider()),
+      ChangeNotifierProvider(create: (_)=>MainProvider()),
+      ChangeNotifierProvider(create: (_)=>SlidingProvider())
     ],
     child: const MyApp(),
   ));
@@ -28,11 +32,12 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Flutter Demo',
           theme: ThemeData(
+            primarySwatch: Colors.teal,
             textTheme: const TextTheme(
               bodyMedium: TextStyle(color: Colors.white)
             )
           ),
-          home:   const Splash(),
+          home:    MainView(),
         );
       },
       designSize: const Size(375, 812),

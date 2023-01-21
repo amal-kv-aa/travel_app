@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_image_slideshow/flutter_image_slideshow.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:travel_app/screens/home/view/Home.dart';
+import 'package:travel_app/screens/main/view/mainview.dart';
 import 'package:travel_app/screens/splash/provider/splash.dart';
 
 class Splash extends StatelessWidget {
@@ -30,27 +31,27 @@ class Splash extends StatelessWidget {
             onPageChanged: (value) {
               context.read<SplashProvider>().updateLine(value, context);
             },
-            autoPlayInterval: 5000,
+            autoPlayInterval: 3000,
             isLoop: false,
             children: const [
               ImageIntro(
                   img:
-                      "https://i.pinimg.com/564x/4f/72/38/4f7238120511bfe8dae2289a9615e3ac.jpg"),
+                      "assets/4f7238120511bfe8dae2289a9615e3ac.jpg"),
               ImageIntro(
                   img:
-                      "https://i.pinimg.com/564x/fe/4c/97/fe4c9763fb96dd02bd603a9424494b38.jpg"),
+                      "assets/dec462cce6e3bd7683e51ae88f312fb8.jpg"),
               ImageIntro(
                   img:
-                      "https://i.pinimg.com/564x/de/c4/62/dec462cce6e3bd7683e51ae88f312fb8.jpg"),
+                      "assets/fe4c9763fb96dd02bd603a9424494b38.jpg"),
               ImageIntro(
                   img:
-                      "https://i.pinimg.com/564x/e3/1e/0b/e31e0b365fa0371dec49b354c1e99f52.jpg"),
+                      "assets/e31e0b365fa0371dec49b354c1e99f52.jpg"),
             ],
           ),
           const PlanIcon(),
           Positioned(
             left: 120,
-            bottom: 90.h,
+            bottom: 100.h,
             height: 1,
             width: 300.w,
             child: Container(
@@ -63,16 +64,21 @@ class Splash extends StatelessWidget {
           context.watch<SplashProvider>().page == 3
               ? Positioned(
                   bottom: 200.h,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.of(context).push(
-                          MaterialPageRoute(builder: (ctx) => const Home()));
-                    },
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.lime),
-                    child: const Text(
-                      "Start",
-                      style: TextStyle(color: Colors.black),
+                  child: SizedBox(
+                    width: 140.w,
+                    height: 50.h,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                            MaterialPageRoute(builder: (ctx) => MainView()));
+                      },
+                      style:
+                          ElevatedButton.styleFrom(backgroundColor: Colors.teal),
+                      child: const Text(
+                        "Explore",
+                        style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold)
+                        
+                      ),
                     ),
                   ))
               : const SizedBox()
@@ -88,14 +94,14 @@ class PlanIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       left: context.watch<SplashProvider>().linewidth,
-      bottom: 60.h,
-      child: const RotatedBox(
+      bottom: 84.h,
+      child:  RotatedBox(
         quarterTurns: 1,
         child: Icon(
           Icons.airplanemode_active,
-          size: 64,
+          size: 35.sp,
           color: Colors.white,
-          shadows: [
+          shadows: const [
             BoxShadow(
                 blurRadius: 20,
                 color: Color.fromARGB(255, 0, 0, 0),
@@ -117,10 +123,37 @@ class ImageIntro extends StatelessWidget {
       height: double.infinity,
       width: double.infinity,
       decoration: BoxDecoration(
-          image: DecorationImage(image: NetworkImage(img), fit: BoxFit.cover),
+          image: DecorationImage(image: AssetImage(img), fit: BoxFit.cover),
           color: Colors.white),
-      child:  Center(
-        child: Text("enjoy Traveling",style: TextStyle(color: Colors.white,fontSize: 30.sp),),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          SizedBox(height: 40.h,),
+           context.watch<SplashProvider>().page != 3
+              ? 
+          Container(
+            height: 100.h,
+            width: 250.w,
+            decoration: const BoxDecoration(
+             boxShadow: [
+              BoxShadow(
+                color: Colors.teal,
+                blurRadius: 100,
+                
+              )
+             ]
+            ),
+            child: Center(
+              child: Text(
+                "enjoy Traveling",
+                style: 
+                GoogleFonts.anton(color: Colors.white, fontSize: 40.sp)
+                //TextStyle(color: Colors.white, fontSize: 30.sp),
+              ),
+            ),
+          )
+          :const SizedBox()
+        ],
       ),
     );
   }
