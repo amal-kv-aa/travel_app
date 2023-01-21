@@ -1,7 +1,7 @@
 # travel_app
  
- this is travel app ui and used pixel api for images
- i mostly focused on ui and also add some animations 
+ this is travel app ui and used pixel api for images,
+ I mostly focused on ui and also add some animations 
  
  screens
  * intro screens
